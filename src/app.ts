@@ -1,14 +1,14 @@
 import express from "express" ;
 import users from "./route/users/users";
-import bodyParser from "body-parser";
+import path from "path";
+import {getLogger} from './log';
+
+const log = getLogger(__filename);
 const app = express();
 const port = process.env.PORT || 8080; // default port to listen
 
-app.use(bodyParser.json({ type: 'application/json' }));
-app.use(users);
-app.use(express.static("/html"));
+app.use("/users", users);
+app.use(express.static(path.join( __dirname, "../html" ))); //static html being served
 
 // start the Express server
-app.listen( port, () => {
-	console.log(`server started at http://localhost:${port}`);
-});
+app.listen( port, () => log.info(`Server started at http://localhost:${port}`));

@@ -1,6 +1,6 @@
 type User = {
     name: string,
-    id: string,
+    id?: string,
 }
 
 export default User;

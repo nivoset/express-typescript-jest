@@ -1,36 +1,34 @@
 import { Router, Request, Response } from 'express'
-import uuid from 'uuid';
-import User from '../../types/User';
+import mockDb from '../../mock-database'
+import bodyParser from "body-parser";
+import {getLogger} from '../../log';
+
+const log = getLogger(__filename);
 
 const users = Router();
 
-let userList : User[] = [];
-
-users.get('/users', (req : Request, res : Response): void  => {
-	res.status(200).json(userList);
+users.get('/', (req : Request, res : Response): void  => {
+	log.debug("base called")
+	res.status(200).json(mockDb.getAll());
 });
 
-users.post('/user', (req :Request, res : Response) : void => {
-	const {name} = req.body;
-	const id = uuid();
-   userList.push({ name, id });
-   res.status(200).send("ok");
-});
+users.post('/', 
+	bodyParser.json(),
+	(req :Request, res : Response) : void => {
+		const {name} = req.body;
+		mockDb.addUser({name});
+		res.status(200).send("ok");
+	});
 
-users.delete('/user/:userId', (req :Request, res : Response) : void => {
-	const originalLength = userList.length;
+users.delete('/:userId', function removeThisUser (req :Request, res : Response) : void {
 	const userId : string = req.params.userId;
-	userList = userList.filter(removeUser(userId));
-	if (originalLength > userList.length) {
+
+	if (mockDb.removeUserById(userId)) {
 		res.status(200).send("ok");
 	} else {
+		log.error(`error removing id=${userId}`);
 		res.status(404).send("User Id not found");
 	}
 });
 
 export default users;
-
-// const removeUser = (userId) => ({id}) => id !== userId; ???
-const removeUser = (userId: string): ((value: User) => boolean) => 
-		({id} : User): boolean => id !== userId;
-
