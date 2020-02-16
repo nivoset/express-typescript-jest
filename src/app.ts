@@ -11,4 +11,4 @@ app.use("/users", users);
 app.use(express.static(path.join( __dirname, "../html" ))); //static html being served
 
 // start the Express server
-app.listen( port, () => log.info(`Server started at http://localhost:${port}`));
+export default app.listen( port, () => log.info(`Server started at http://localhost:${port}`));
