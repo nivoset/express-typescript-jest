@@ -8,13 +8,15 @@ const log = getLogger(__filename);
 const users = Router();
 
 users.get('/', (req : Request, res : Response): void  => {
-	log.debug("base called")
+	log.debug("get users called");
 	res.status(200).json(mockDb.getAll());
 });
 
 users.post('/', 
 	bodyParser.json(),
 	(req :Request, res : Response) : void => {
+
+		log.debug("add/post users called");
 		const {name} = req.body;
 		mockDb.addUser({name});
 		res.status(200).send("ok");
@@ -22,6 +24,7 @@ users.post('/',
 
 users.delete('/:userId', function removeThisUser (req :Request, res : Response) : void {
 	const userId : string = req.params.userId;
+	log.debug(`removing usersId=${userId}`);
 
 	if (mockDb.removeUserById(userId)) {
 		res.status(200).send("ok");

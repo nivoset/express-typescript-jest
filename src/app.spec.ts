@@ -1,17 +1,20 @@
-import request from "supertest";
-import app from "./app"
+import * as logger from "./log";
+import { Logger } from "winston";
 
+xdescribe("App test", () => {
+    let log : Logger;
+    beforeAll(() => {
+        log = logger.getLogger(__filename);
+        spyOn(log, "info").and.callThrough();
+        spyOn(logger, "getLogger").and.returnValue(log)
+    })
 
-describe("GET / - a get index file", () => {
-	it("HTML loaded", (done) => {
-		request(app)
-				.get("/")
-				.expect(200)
-				.expect("content-type", "text/html; charset=UTF-8")
-				.end(done);
-	});
-
-	afterAll(() => {
-		app.close();
-	});
+    it("Test that listen was called and it opened on a specific port?", (done) => {
+        require("./app");
+        //i hate this......
+        setTimeout(() => {
+            expect(log.info).toBeCalled();
+            done();
+        }, 10)
+    });
 });

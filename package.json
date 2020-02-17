@@ -9,8 +9,8 @@
     "dev": "nodemon src/app.ts",
     "prebuild": "npx tslint -c tslint.json -p tsconfig.json --fix",
     "build": "npx tsc -p .",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test": "jest --runInBand",
+    "test:coverage": "jest --coverage --runInBand"
   },
   "keywords": [],
   "author": "",

@@ -1,10 +1,16 @@
 import request from "supertest";
-import app from "../../app"
+import server from "../../server"
+import mockDb from "../../mock-database"
 
 //TODO: mock the mockDB
 
 describe("/users", () => {
+    let app : any;
+    beforeAll((done) => {
+        app = server.listen(8082, done);
+    })
 	it("GET users", (done) => {
+        spyOn(mockDb, "getAll").and.returnValue([]);
 		request(app)
 				.get("/users")
 				.expect(200)
@@ -15,6 +21,7 @@ describe("/users", () => {
 				.then(done);
 	});
 	it("POST users", (done) => {
+        spyOn(mockDb, "addUser").and.returnValue(null);
 		request(app)
                 .post("/users")
                 .set({ name: "User name"})
@@ -26,22 +33,18 @@ describe("/users", () => {
 				.then(done);
 	});
 	it("DELETE users -- Passes", (done) => {
+        spyOn(mockDb, "removeUserById").and.returnValue(true);
 		request(app)
-                .post("/users")
-                .set({ name: "User name"})
+                .delete("/users/FAKEUSER")
 				.expect(200)
                 .expect("content-type", "text/html; charset=utf-8")
-                .then(async () => {
-                    const {body} = await request(app).get("/users");
-                    expect(body.length).toBeGreaterThan(0);
-                    const [user] = body;
-                    const {id} = user;
-                    request(app)
-                        .delete(`/users/${id}`)
-                        .expect(200).end(done)
-                });
+                .then(({text}) => {
+                    expect(text).toEqual("ok");
+                })
+				.then(done);
 	});
 	it("DELETE users -- fails", (done) => {
+        spyOn(mockDb, "removeUserById").and.returnValue(false);
 		request(app)
                 .delete("/users/FAKEUSER")
 				.expect(404)
@@ -52,7 +55,7 @@ describe("/users", () => {
 				.then(done);
 	});
 
-	afterAll(() => {
-		app.close();
+	afterAll((done) => {
+		app.close(done);
 	});
 });
