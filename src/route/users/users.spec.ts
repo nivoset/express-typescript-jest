@@ -1,6 +1,7 @@
 import request from "supertest";
 import app from "../../app"
 
+//TODO: mock the mockDB
 
 describe("/users", () => {
 	it("GET users", (done) => {
