@@ -2,7 +2,7 @@ import User from "../types/User"
 import uuid from "uuid";
 import {getLogger} from '../log';
 
-const log = getLogger(__filename);
+const log = getLogger("mock database");
 
 let userList: User[] = [];
 

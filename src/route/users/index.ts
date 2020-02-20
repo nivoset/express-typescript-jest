@@ -3,7 +3,7 @@ import mockDb from '../../mock-database'
 import bodyParser from "body-parser";
 import {getLogger} from '../../log';
 
-const log = getLogger(__filename);
+const log = getLogger("route/users");
 
 const users = Router();
 
