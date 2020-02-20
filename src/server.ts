@@ -4,9 +4,12 @@ import path from "path";
 import { routeLogging } from "./log"
 const app = express();
 
+// logger used in the route
 app.use(routeLogging);
+
 // users route
 app.use("/users", users);
+
 // static html being served
 app.use(express.static(path.join( __dirname, "../html" )));
 
