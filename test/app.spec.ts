@@ -1,7 +1,7 @@
 import * as logger from "../src/log";
 import { Logger } from "winston";
 
-xdescribe("App test", () => {
+describe("App test", () => {
     let log : Logger;
     beforeAll(() => {
         log = logger.getLogger(__filename);
@@ -10,7 +10,7 @@ xdescribe("App test", () => {
     })
 
     it("Test that listen was called and it opened on a specific port?", (done) => {
-        require("./app");
+        require("../src/app");
         //i hate this......
         setTimeout(() => {
             expect(log.info).toBeCalled();

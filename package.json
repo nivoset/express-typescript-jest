@@ -6,11 +6,11 @@
   "scripts": {
     "prestart": "npm run build",
     "start": "node .",
-    "dev": "nodemon src/app.ts",
+    "dev": "npx nodemon src/app.ts",
     "prebuild": "npx tslint -c tslint.json -p tsconfig.json --fix",
     "build": "npx tsc -p .",
-    "test": "jest --runInBand",
-    "test:coverage": "jest --coverage --runInBand"
+    "test": "npx jest",
+    "test:coverage": "npx jest --coverage"
   },
   "keywords": [],
   "author": "",
