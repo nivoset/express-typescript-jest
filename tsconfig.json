@@ -15,6 +15,6 @@
         }
     },
     "include": [
-        "src/**/*"
+        "src/**/*", "test/log/index.spec.ts", "test/log/index.spec.ts", "test/route/users/users.spec.ts", "test/app.spec.ts", "test/server.spec.ts"
     ]
 }

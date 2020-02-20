@@ -1,6 +1,6 @@
 import request from "supertest";
-import server from "../../server"
-import mockDb from "../../mock-database"
+import server from "../../../src/server"
+import mockDb from "../../../src/mock-database"
 
 describe("/users", () => {
     let app : any;

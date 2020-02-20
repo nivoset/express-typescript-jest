@@ -1,5 +1,5 @@
-import db from "./index"
-import User from "../types/User"
+import db from "../../src/mock-database/index"
+import User from "../../src/types/User"
 
 describe("Mock DB", () => {
     beforeEach(() => {

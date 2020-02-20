@@ -22,11 +22,11 @@ users.post('/',
 		res.status(200).send("ok");
 	});
 
-users.delete('/:userId', function removeThisUser (req :Request, res : Response) : void {
+users.delete('/:userId', (req :Request, res : Response) : void => {
 	const userId : string = req.params.userId;
-	log.debug(`removing usersId=${userId}`);
 
 	if (mockDb.removeUserById(userId)) {
+		log.info(`successfully removed usersId=${userId}`);
 		res.status(200).send("ok");
 	} else {
 		log.error(`error removing id=${userId}`);

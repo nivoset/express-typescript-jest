@@ -1,5 +1,5 @@
 import express from "express" ;
-import users from "./route/users/users";
+import users from "./route/users";
 import path from "path";
 const app = express();
 

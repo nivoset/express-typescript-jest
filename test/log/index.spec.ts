@@ -1,4 +1,4 @@
-import {getLogger} from "./index"
+import {getLogger} from "../../src/log/index"
 
 describe("Logger tests", () => {
     const baseEnv = {...process.env};

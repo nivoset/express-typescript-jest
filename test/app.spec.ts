@@ -1,4 +1,4 @@
-import * as logger from "./log";
+import * as logger from "../src/log";
 import { Logger } from "winston";
 
 xdescribe("App test", () => {
