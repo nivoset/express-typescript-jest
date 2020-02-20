@@ -2,25 +2,24 @@ import request from "supertest";
 import server from "../../server"
 import mockDb from "../../mock-database"
 
-//TODO: mock the mockDB
-
 describe("/users", () => {
     let app : any;
     beforeAll((done) => {
         app = server.listen(8082, done);
     })
 	it("GET users", (done) => {
-        spyOn(mockDb, "getAll").and.returnValue([]);
+        const mockResults = [{ name: "Mock user", id: "mock ID" }];
+        spyOn(mockDb, "getAll").and.returnValue(mockResults);
 		request(app)
 				.get("/users")
 				.expect(200)
                 .expect("content-type", "application/json; charset=utf-8")
                 .then(({body}) => {
-                    expect(Array.isArray(body)).toBe(true);
+                    expect(body).toEqual(mockResults);
                 })
 				.then(done);
 	});
-	it("POST users", (done) => {
+	it("POST add to users", (done) => {
         spyOn(mockDb, "addUser").and.returnValue(null);
 		request(app)
                 .post("/users")

@@ -6,7 +6,7 @@ describe("Mock DB", () => {
         //clear every existing entry
         db.getAll()
             .map(({id} : User) => id)
-            .forEach((id: string) => db.removeUserById(id))
+            .forEach(db.removeUserById)
     });
     it("adds user", () => {
         const name = "Test User";

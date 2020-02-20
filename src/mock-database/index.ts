@@ -12,7 +12,7 @@ const removeUser = (userId : string):
 
 export default {
     getAll: () : User[] => [...userList.map((user : User) => ({...user}))],
-    addUser: (user : User) : number => userList.push({...user, id: uuid()}),
+    addUser: (user : User) : void => { userList.push({...user, id: uuid()}) },
     removeUserById: (userId: string) : boolean => {
         log.debug(`Removing userId=${userId}`);
         const originalLength = userList.length;
