@@ -12,8 +12,8 @@ users.get('/', (req : Request, res : Response): void  => {
 	res.status(200).json(mockDb.getAll());
 });
 
-users.post('/', 
-	bodyParser.json(), //parse the body to make it available
+users.post('/',
+	bodyParser.json(), // parse the body to make it available
 	(req :Request, res : Response) : void => {
 
 		log.debug("add/post users called");

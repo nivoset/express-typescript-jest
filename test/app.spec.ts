@@ -11,7 +11,7 @@ describe("App test", () => {
 
     it("Test that listen was called and it opened on a specific port?", (done) => {
         require("../src/app");
-        //i hate this......
+        // i hate this......
         setTimeout(() => {
             expect(log.info).toBeCalled();
             done();

@@ -7,7 +7,7 @@ const log = getLogger(__filename);
 let userList: User[] = [];
 
 // const removeUser = (userId) => ({id}) => id !== userId; did i get this right?
-const removeUser = (userId : string): 
+const removeUser = (userId : string):
         ((value: User) => boolean) => ({id} : User): boolean => id !== userId;
 
 export default {

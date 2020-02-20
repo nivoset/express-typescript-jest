@@ -5,10 +5,10 @@ import { routeLogging } from "./log"
 const app = express();
 
 app.use(routeLogging);
-//users route
+// users route
 app.use("/users", users);
-//static html being served
-app.use(express.static(path.join( __dirname, "../html" ))); 
+// static html being served
+app.use(express.static(path.join( __dirname, "../html" )));
 
 // start the Express server
 export default app
