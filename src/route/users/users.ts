@@ -13,7 +13,7 @@ users.get('/', (req : Request, res : Response): void  => {
 });
 
 users.post('/', 
-	bodyParser.json(),
+	bodyParser.json(), //parse the body to make it available
 	(req :Request, res : Response) : void => {
 
 		log.debug("add/post users called");
